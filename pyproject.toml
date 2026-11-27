@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sqloop"
+version = "0.1.0"
+description = "ループで書いたデータ処理コードを SQL の SELECT 文に変換するツール"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = []
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Database",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+sqloop = "sqloop.cli:main"
+
+# 言語フロントエンドの登録口（他の言語はここに追加、または別パッケージから登録）
+[project.entry-points."sqloop.frontends"]
+python = "sqloop.frontends.python:PythonFrontend"
+
+# 変換器プラグインの登録口（AI 変換器などは別パッケージからここに登録する）
+[project.entry-points."sqloop.converters"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
